@@ -33,7 +33,7 @@ messages:
   rank-color-2: "&f" # Silver for Rank 2
   rank-color-3: "&6" # Bronze for Rank 3
   rank-color-default: "&7" # Default color for other ranks
-  command-usage: "&cUsage: /dum <stats|killtop|playtimetop|maxleveltop>"
+  command-usage: "&cUsage: /dun <stats|killtop|playtimetop|maxleveltop>"
   command-player-not-found: "&cCould not find data for player {player_name}"
   command-no-data: "&7No data available yet"
   stats-title: "&6--- Stats for {player_name} ---"
