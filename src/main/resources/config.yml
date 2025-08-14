@@ -1,0 +1,42 @@
+# DungeonStats Plugin Configuration
+database: "data.yml"
+api-server:
+  enabled: true
+  port: 8080
+log-checker:
+  enabled: true
+  interval-ticks: 100
+holograms:
+  enabled: false
+  refresh-interval-seconds: 10
+  # 'SINGLE': Use one text_display entity, rotating between different leaderboards.
+  # 'MULTIPLE': Use a separate text_display entity for each leaderboard.
+  display-mode: 'SINGLE'
+  single-display:
+    location: "world,0.5,100.5,0.5" # Format: "world_name,x,y,z"
+    # How long (in seconds) to display each leaderboard before switching to the next.
+    rotation-interval-seconds: 5
+  multiple-displays:
+    killtop:
+      location: "world,5.5,101.5,0.5"
+    playtimetop:
+      location: "world,0.5,101.5,5.5"
+    maxleveltop:
+      location: "world,-4.5,101.5,0.5"
+messages:
+  title-kills: "&6&l--- Kills Leaderboard ---"
+  title-playtime: "&6&l--- Playtime Leaderboard ---"
+  title-maxlevel: "&6&l--- Max Level Leaderboard ---"
+  # Available Placeholders: {rank}, {player_name}, {value}
+  rank-entry: "#{rank} &b{player_name}: &f{value}"
+  rank-color-1: "&e" # Gold for Rank 1
+  rank-color-2: "&f" # Silver for Rank 2
+  rank-color-3: "&6" # Bronze for Rank 3
+  rank-color-default: "&7" # Default color for other ranks
+  command-usage: "&cUsage: /dum <stats|killtop|playtimetop|maxleveltop>"
+  command-player-not-found: "&cCould not find data for player {player_name}"
+  command-no-data: "&7No data available yet"
+  stats-title: "&6--- Stats for {player_name} ---"
+  stats-line-maxlevel: "&eHighest Dungeon Level: &f{value}"
+  stats-line-kills: "&eTotal Kills: &f{value}"
+  stats-line-playtime: "&eTotal Playtime: &f{value}"

@@ -1,0 +1,11 @@
+name: DungeonStats
+version: '1.0'
+main: top.steve3184.dungeonstats.DungeonStats
+api-version: '1.21'
+author: Steve3184
+description: A comprehensive statistics and leaderboard system for the Infinity Dungeons map.
+
+commands:
+  dun:
+    description: DungeonStats's Main command
+    usage: /dun <stats|killtop|playtimetop|maxleveltop>

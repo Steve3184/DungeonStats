@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'io.papermc.paperweight.userdev' version '1.7.1'
+    id 'xyz.jpenilla.run-paper' version '2.3.1'
+    id 'com.gradleup.shadow' version '8.3.0'
+}
+
+group = 'top.steve3184.dungeonstats'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    paperweight.paperDevBundle("1.21.1-R0.1-SNAPSHOT")
+    // 添加 Google 的 Gson 库，用于处理 JSON
+    implementation 'com.google.code.gson:gson:2.10.1'
+}
+
+// 配置 shadowJar 任务
+tasks.shadowJar {
+    // 将 Gson 库重新定位到你的插件包内，防止与其他插件冲突
+    relocate 'com.google.gson', 'top.steve3184.dungeonstats.libs.gson'
+
+    // 确保最终的jar文件名是标准的，而不是 "RougeStats-1.0-all.jar"
+    archiveClassifier.set('')
+}
+
+// 让 build 任务依赖于 shadowJar 任务，这样 "build" 就会生成最终的 fat-jar
+tasks.build.dependsOn(tasks.shadowJar)
+
+
+def targetJavaVersion = 21
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
